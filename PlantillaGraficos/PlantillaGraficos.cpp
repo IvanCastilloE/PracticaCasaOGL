@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define GLEW_STATIC
 
@@ -28,16 +29,45 @@ void dibujarTecho() {
 	//Especificar que dejaremos de dibujar
 	glEnd();
 }
-void dibujarLineas() {
+void dibujarMarcoVentanaInt() {
 	glBegin(GL_LINES);
 	glColor3f(1.0f, 0.4f, 0.6f);
+	glVertex3f(0.45f, 0.3f, 0.0f);
+	glVertex3f(0.45f, 0.0f, 0.0f);
+	glVertex3f(0.30f, 0.15f, 0.0f);
+	glVertex3f(0.60f, 0.15f, 0.0f);
 
 	glEnd();
 }
+void dibujarSol() {
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 0.96f, 0.21f);
+	for (double i = 0; i < 360; i+=0.5) {
+		glVertex3f(0.2*cos(i * 3.1416 / 180)-0.8, 0.2*sin(i * 3.1416 / 180)+0.8, 0.0f);
+	}
+	glEnd();
+}
+void dibujaVentana() {
+	glBegin(GL_TRIANGLE_STRIP);
+	glColor3f(0.0f, 0.5f, 0.7f);
+	glVertex3f(0.30f, 0.0f, 0.0f);
+	glVertex3f(0.6f, 0.0f, 0.0f);
+	glVertex3f(0.6f, 0.3f, 0.0f);
+	glVertex3f(0.30f, 0.3f, 0.0f);
+	glVertex3f(0.30f, 0.0f, 0.0f);
 
-void dibujarLineaContinua() {
+	glEnd();
+
+}
+
+void dibujarMarcoventana() {
 	glBegin(GL_LINE_STRIP);
-	glColor3f(0.1f, 0.3f, 0.4f);
+	glColor3f(0.5f, 0.5f, 0.0f);
+	glVertex3f(0.30f, 0.0f, 0.0f);
+	glVertex3f(0.6f, 0.0f, 0.0f);
+	glVertex3f(0.6f, 0.3f, 0.0f);
+	glVertex3f(0.30f, 0.3f, 0.0f);
+	glVertex3f(0.30f, 0.0f, 0.0f);
 	glEnd();
 }
 
@@ -82,8 +112,12 @@ void dibujar() {
 	dibujarTecho();
 	dibujarCesped();
 	dibujarCasa();
-	dibujarPuerta();
+	dibujarMarcoventana();
+	dibujaVentana();
 
+	dibujarPuerta();
+	dibujarMarcoVentanaInt();
+	dibujarSol();
 }
 
 int main()
